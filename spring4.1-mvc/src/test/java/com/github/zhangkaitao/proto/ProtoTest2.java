@@ -1,46 +1,32 @@
 package com.github.zhangkaitao.proto;
 
-import com.github.zhangkaitao.pb.UserProtos;
-import com.github.zhangkaitao.web.controller.MyExtensionRegistryInitializer;
-import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.webapp.WebAppContext;
-import org.junit.*;
+import static org.springframework.test.web.client.MockRestServiceServer.createServer;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
+
+import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
 import org.springframework.http.converter.protobuf.ExtensionRegistryInitializer;
 import org.springframework.http.converter.protobuf.ProtobufHttpMessageConverter;
 import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.mock.web.MockServletContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MockMvcBuilder;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.RequestBuilder;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.request.RequestPostProcessor;
 import org.springframework.test.web.servlet.setup.ConfigurableMockMvcBuilder;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcConfigurer;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.net.URI;
-
-import static org.springframework.test.web.client.MockRestServiceServer.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.*;
-import static org.springframework.test.web.client.response.MockRestResponseCreators.*;
+import com.github.zhangkaitao.web.controller.MyExtensionRegistryInitializer;
 
 /**
 * User: zhangkaitao
 * Date: 14-8-5
-* Time: ÉÏÎç8:48
+* Time: ï¿½ï¿½ï¿½ï¿½8:48
 * Version: 1.0
 */
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -88,26 +74,26 @@ public class ProtoTest2 {
         };
     }
 
-    @Test
-    public void testRead() throws Exception {
-        MvcResult mvcResult = mockMvc.perform(get("/proto/read")).andReturn();
-
-        Assert.assertEquals("aa", mvcResult.getRequest().getAttribute("aa"));
-
-        String response = mvcResult.getResponse().getContentAsString();
-        mockRestServiceServer
-                .expect(requestTo("/proto/read"))
-                .andExpect(method(HttpMethod.POST))
-                .andRespond(withSuccess(response, ProtobufHttpMessageConverter.PROTOBUF));
-
-        HttpHeaders headers = new HttpHeaders();
-        RequestEntity<UserProtos.User> requestEntity =
-                new RequestEntity<UserProtos.User>(headers, HttpMethod.POST, URI.create("/proto/read"));
-
-        ResponseEntity<UserProtos.User> responseEntity =
-                restTemplate.exchange(requestEntity, UserProtos.User.class);
-
-        System.out.println(responseEntity.getBody());
-    }
-
+//    @Test
+//    public void testRead() throws Exception {
+//        MvcResult mvcResult = mockMvc.perform(get("/proto/read")).andReturn();
+//
+//        Assert.assertEquals("aa", mvcResult.getRequest().getAttribute("aa"));
+//
+//        String response = mvcResult.getResponse().getContentAsString();
+//        mockRestServiceServer
+//                .expect(requestTo("/proto/read"))
+//                .andExpect(method(HttpMethod.POST))
+//                .andRespond(withSuccess(response, ProtobufHttpMessageConverter.PROTOBUF));
+//
+//        HttpHeaders headers = new HttpHeaders();
+//        RequestEntity<UserProtos.User> requestEntity =
+//                new RequestEntity<UserProtos.User>(headers, HttpMethod.POST, URI.create("/proto/read"));
+//
+//        ResponseEntity<UserProtos.User> responseEntity =
+//                restTemplate.exchange(requestEntity, UserProtos.User.class);
+//
+//        System.out.println(responseEntity.getBody());
+//    }
+//
 }

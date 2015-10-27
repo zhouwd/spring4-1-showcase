@@ -1,35 +1,31 @@
 package com.github.zhangkaitao.web.controller;
 
-import com.github.zhangkaitao.web.model.User;
-import org.springframework.beans.DirectFieldAccessor;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.DataBinder;
-import org.springframework.validation.DirectFieldBindingResult;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import java.io.Serializable;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * User: zhangkaitao
  * Date: 14-8-6
- * Time: ÉÏÎç8:45
+ * Time: ï¿½ï¿½ï¿½ï¿½8:45
  * Version: 1.0
  */
 @RestController
 public class DirectFieldController {
 
     @RequestMapping("/directField")
-    public String directFieldInject(MyUser user) {
+	@ResponseBody
+    public String directFieldInject( MyUser user) {
         System.out.println(user);
         return user.toString();
     }
-
-    @InitBinder
-    public void initBinder(DataBinder dataBinder) {
-        dataBinder.initDirectFieldAccess();//Ö±½Ó×Ö¶Î·ÃÎÊ
-    }
+//
+//    @InitBinder
+//    public void initBinder(DataBinder dataBinder) {
+//        dataBinder.initDirectFieldAccess();
+//    }
 
     static class MyUser implements Serializable {
         private int id;
@@ -42,5 +38,21 @@ public class DirectFieldController {
                     ", name='" + name + '\'' +
                     '}';
         }
-    }
+
+		public int getId() {
+			return id;
+		}
+
+		public void setId(int id) {
+			this.id = id;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+	}
 }

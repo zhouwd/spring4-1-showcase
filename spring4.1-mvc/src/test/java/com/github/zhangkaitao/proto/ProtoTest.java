@@ -1,29 +1,19 @@
 package com.github.zhangkaitao.proto;
 
-import com.github.zhangkaitao.pb.UserProtos;
-import com.github.zhangkaitao.web.controller.MyExtensionRegistryInitializer;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Test;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.RequestEntity;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.converter.protobuf.ExtensionRegistryInitializer;
 import org.springframework.http.converter.protobuf.ProtobufHttpMessageConverter;
-import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestTemplate;
 
-import java.net.URI;
+import com.github.zhangkaitao.web.controller.MyExtensionRegistryInitializer;
 
 /**
 * User: zhangkaitao
 * Date: 14-8-5
-* Time: ÉÏÎç8:48
+* Time: ï¿½ï¿½ï¿½ï¿½8:48
 * Version: 1.0
 */
 public class ProtoTest {
@@ -35,12 +25,12 @@ public class ProtoTest {
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        //´´½¨Ò»¸öserver
+        //ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½server
         server = new Server(8080);
         WebAppContext context = new WebAppContext();
         String webapp = "spring4.1-mvc/src/main/webapp";
-        context.setDescriptor(webapp + "/WEB-INF/web.xml");  //Ö¸¶¨web.xmlÅäÖÃÎÄ¼þ
-        context.setResourceBase(webapp);  //Ö¸¶¨webappÄ¿Â¼
+        context.setDescriptor(webapp + "/WEB-INF/web.xml");  //Ö¸ï¿½ï¿½web.xmlï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½
+        context.setResourceBase(webapp);  //Ö¸ï¿½ï¿½webappÄ¿Â¼
         context.setContextPath("/");
         context.setParentLoaderPriority(true);
 
@@ -55,11 +45,11 @@ public class ProtoTest {
 
     @AfterClass
     public static void afterClass() throws Exception {
-        server.stop(); //µ±²âÊÔ½áÊøÊ±Í£Ö¹·þÎñÆ÷
+        server.stop(); //ï¿½ï¿½ï¿½ï¿½ï¿½Ô½ï¿½ï¿½ï¿½Ê±Í£Ö¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     }
 
 
-    @Test
+   /* @Test
     public void testRead() {
         HttpHeaders headers = new HttpHeaders();
         RequestEntity<UserProtos.User> requestEntity =
@@ -82,6 +72,6 @@ public class ProtoTest {
                 restTemplate.exchange(requestEntity, UserProtos.User.class);
         System.out.println(responseEntity.getBody());
     }
-
+*/
 
 }
